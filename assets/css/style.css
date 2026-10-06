@@ -122,6 +122,33 @@ section[id] { scroll-margin-top: 40px; }
 .progress { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 300; pointer-events: none; }
 .progress__bar { height: 100%; background: var(--grad); transform-origin: left; transform: scaleX(var(--scroll, 0)); box-shadow: 0 0 12px rgba(255, 61, 129, .7); }
 
+/* ---------- Cortină la schimbarea limbii ---------- */
+/* Peste header și modal (z-index 950), sub cursor (9999). Duratele sunt sincronizate cu main.js. */
+.lang-wipe {
+  position: fixed; inset: 0; z-index: 950;
+  display: grid; place-items: center; overflow: hidden;
+  background: var(--grad); background-size: 200% 100%;
+  pointer-events: none; visibility: hidden;
+  clip-path: inset(0 100% 0 0);
+}
+.lang-wipe::before {
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(90deg, rgba(11, 11, 18, .07) 0 1px, transparent 1px 84px);
+}
+.lang-wipe.is-in { visibility: visible; clip-path: inset(0 0 0 0); background-position: 100% 0; transition: clip-path .45s var(--ease-io), background-position .95s var(--ease-io); }
+.lang-wipe.is-out { visibility: visible; clip-path: inset(0 0 0 100%); background-position: 100% 0; transition: clip-path .5s var(--ease-io); }
+.lang-wipe__text {
+  position: relative;
+  font: 800 clamp(5rem, 24vw, 17rem)/1 var(--font-display); letter-spacing: -.06em;
+  color: #0b0b12;
+  opacity: 0; transform: translateX(-18%) skewX(-8deg);
+}
+.lang-wipe.is-in .lang-wipe__text { opacity: 1; transform: none; transition: opacity .3s .12s, transform .7s var(--ease) .08s; }
+.lang-wipe.is-out .lang-wipe__text { opacity: 0; transform: translateX(22%) skewX(-8deg); transition: opacity .3s, transform .5s var(--ease-io); }
+
+/* Text doar pentru cititoarele de ecran */
+.sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
+
 /* ---------- Fundal animat ---------- */
 .bg { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
 .bg__blob { position: absolute; border-radius: 50%; opacity: .55; animation: blob 24s var(--ease-io) infinite alternate; will-change: transform; }
@@ -218,6 +245,38 @@ section[id] { scroll-margin-top: 40px; }
 }
 .nav a:hover, .nav a.is-active { color: var(--text); }
 .nav a:hover::after, .nav a.is-active::after { transform: scaleX(1); transform-origin: left; }
+
+/* Comutator de limbă RO / EN */
+.lang {
+  position: relative; isolation: isolate; flex: none;
+  display: inline-flex; align-items: center;
+  padding: 4px; margin-left: -10px; border-radius: 999px;
+  border: 1px solid var(--line-2); background: rgba(255, 255, 255, .03);
+  transition: border-color .35s, background-color .35s;
+}
+/* Fără JavaScript (sau fără i18n.js) site-ul e doar în română: comutatorul nu se afișează */
+html:not(.js) .lang, .lang[hidden] { display: none; }
+.lang:hover { border-color: rgba(255, 255, 255, .24); background: rgba(255, 255, 255, .05); }
+.lang__pill {
+  position: absolute; z-index: 0; top: 4px; left: 4px; width: 40px; height: 32px;
+  border-radius: 999px; background: var(--grad);
+  box-shadow: 0 6px 20px -6px rgba(255, 61, 129, .7);
+  transition: transform .6s var(--ease-back);
+  pointer-events: none;
+}
+/* Indicatorul alunecă pe EN (data-active îl mută imediat la click, înaintea cortinei) */
+html[lang="en"] .lang__pill, .lang[data-active="en"] .lang__pill { transform: translateX(100%); }
+.lang[data-active="ro"] .lang__pill { transform: none; }
+.lang__btn {
+  position: relative; z-index: 1;
+  width: 40px; height: 32px; padding: 0 0 0 .14em; border-radius: 999px;
+  display: grid; place-items: center;
+  font: 700 12px/1 var(--font-mono); letter-spacing: .14em;
+  color: var(--muted); transition: color .35s;
+}
+.lang__btn:hover { color: var(--text); }
+.lang__btn.is-active { color: #fff; }
+.lang__btn:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; border-radius: 999px; }
 
 .burger { display: none; position: relative; width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--line-2); margin-left: auto; }
 .burger span { position: absolute; left: 14px; right: 14px; height: 2px; background: var(--text); border-radius: 2px; transition: transform .5s var(--ease), top .3s; }
@@ -938,7 +997,11 @@ em .word__in, [data-split] em .word__in { background: var(--grad); -webkit-backg
 @media (max-width: 900px) {
   :root { --header-h: 68px; }
   .nav, .header__cta { display: none; }
-  .burger { display: block; }
+  .header__inner { gap: 8px; }
+  .lang { margin-left: auto; }
+  .burger { display: block; flex: none; }
+  /* Butonul de meniu rămâne la dreapta (margin-left: auto) și când comutatorul lipsește */
+  html.js .lang:not([hidden]) ~ .burger { margin-left: 10px; }
   .section__head--row, .process__head { flex-direction: column; align-items: flex-start; gap: 0; }
   .section__head--row .section__lead, .process__head .section__lead { max-width: 600px; margin: 0; }
   .process__head .section__title { margin-bottom: 18px; }
@@ -981,9 +1044,17 @@ em .word__in, [data-split] em .word__in { background: var(--grad); -webkit-backg
   .modal__close { top: -52px; }
 }
 
+/* Ecrane foarte înguste (320px): logo, comutator și meniu încap pe un rând */
+@media (max-width: 359px) {
+  .logo { gap: 8px; font-size: 17px; }
+  .lang__btn, .lang__pill { width: 34px; }
+  html.js .lang:not([hidden]) ~ .burger { margin-left: 8px; }
+}
+
 /* Accesibilitate: mișcare redusă */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; transition-delay: 0s !important; }
   .marquee__track { animation: none !important; }
+  .lang-wipe { display: none; }
 }
