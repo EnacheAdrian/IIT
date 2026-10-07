@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--
+    Traduceri (RO / EN): textele în română din această pagină sunt sursa principală.
+    Elementele marcate cu atributele data-i18n (text) și data-i18n-attr (atribute) au
+    versiunea în engleză în assets/js/i18n.js, în obiectul I18N.en, la aceeași cheie.
+  -->
+  <title data-i18n="meta.title">CLIPLAB — Editare video pentru streameri și YouTuberi</title>
+  <meta name="description" content="Studio de editare video pentru creatori: shorts, TikTok-uri, highlights de stream, compilații și montaj YouTube. Transformăm orele de stream în clipuri care adună vizualizări." data-i18n-attr="content:meta.description">
+  <meta name="theme-color" content="#07070b">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="CLIPLAB — Editare video pentru streameri și YouTuberi" data-i18n-attr="content:meta.ogTitle">
+  <meta property="og:description" content="Shorts, highlights, compilații și montaj YouTube. Tu faci conținut, noi îl facem viral." data-i18n-attr="content:meta.ogDescription">
+  <meta property="og:locale" content="ro_RO" data-i18n-attr="content:meta.ogLocale">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;700;800&display=swap">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>document.documentElement.classList.add('js');</script>
+  <script src="assets/js/portfolio-data.js" defer></script>
+  <script src="assets/js/i18n.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body class="is-loading">
+
+  <!-- ============ ICONIȚE (sprite SVG) ============ -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12.6-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></symbol>
+    <symbol id="i-live" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49M7.76 16.24a6 6 0 0 1 0-8.49M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></symbol>
+    <symbol id="i-film" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m10 9 5 3-5 3z"/></symbol>
+    <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4M5 17v4M3 19h4"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></symbol>
+    <symbol id="i-comment" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+    <symbol id="i-trend" viewBox="0 0 24 24"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m17 8-5-5-5 5"/><path d="M12 3v12"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+    <symbol id="i-scissors" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.12 15.88M14.47 14.48 20 20M8.12 8.12 12 12"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.5l2.94 5.96 6.56.95-4.75 4.63 1.12 6.54L12 17.5l-5.87 3.08 1.12-6.54L2.5 9.41l6.56-.95z"/></symbol>
+    <symbol id="i-spark4" viewBox="0 0 24 24"><path d="M12 1c.7 6 5 10.3 11 11-6 .7-10.3 5-11 11-.7-6-5-10.3-11-11 6-.7 10.3-5 11-11z"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></symbol>
+  </svg>
+
+  <!-- ============ PRELOADER ============ -->
+  <div class="preloader" aria-hidden="true">
+    <div class="preloader__inner">
+      <div class="preloader__logo">CLIP<span>LAB</span></div>
+      <div class="preloader__bar"><span></span></div>
+      <div class="preloader__meta"><span>RENDERING</span><span class="preloader__pct">0%</span></div>
+    </div>
+  </div>
+
+  <!-- ============ CURSOR, PROGRES, FUNDAL ============ -->
+  <div class="cursor" aria-hidden="true">
+    <div class="cursor__dot"></div>
+    <div class="cursor__ring"><span class="cursor__label"></span></div>
+  </div>
+
+  <div class="progress" aria-hidden="true"><div class="progress__bar"></div></div>
+  <div class="lang-wipe" aria-hidden="true"><span class="lang-wipe__text"></span></div>
+
+  <div class="bg" aria-hidden="true">
+    <div class="bg__blob bg__blob--1"></div>
+    <div class="bg__blob bg__blob--2"></div>
+    <div class="bg__blob bg__blob--3"></div>
+    <div class="bg__grid"></div>
+    <div class="bg__noise"></div>
+  </div>
+
+  <!-- ============ HEADER ============ -->
+  <header class="header">
+    <div class="container header__inner">
+      <a href="#top" class="logo" aria-label="CLIPLAB — acasă" data-i18n-attr="aria-label:nav.logo">
+        <span class="logo__mark"><svg viewBox="0 0 24 24"><use href="#i-play"/></svg></span>
+        <span class="logo__text">CLIP<em>LAB</em></span>
+      </a>
+      <nav class="nav" aria-label="Navigare principală" data-i18n-attr="aria-label:nav.mainLabel">
+        <a href="#servicii" data-i18n="nav.services">Servicii</a>
+        <a href="#portofoliu" data-i18n="nav.portfolio">Portofoliu</a>
+        <a href="#proces" data-i18n="nav.process">Proces</a>
+        <a href="#preturi" data-i18n="nav.pricing">Prețuri</a>
+        <a href="#faq" data-i18n="nav.faq">FAQ</a>
+      </nav>
+      <div class="lang" role="group" aria-label="Limba site-ului" data-i18n-attr="aria-label:lang.label">
+        <span class="lang__pill" aria-hidden="true"></span>
+        <button type="button" class="lang__btn is-active" data-lang="ro" lang="ro" aria-pressed="true" title="Română">RO</button>
+        <button type="button" class="lang__btn" data-lang="en" lang="en" aria-pressed="false" title="English">EN</button>
+      </div>
+      <a href="#contact" class="btn btn--primary btn--sm header__cta magnetic"><span data-i18n="nav.cta">Cere ofertă</span></a>
+      <button class="burger" type="button" aria-label="Deschide meniul" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <nav class="mobile-menu__nav" aria-label="Navigare mobil" data-i18n-attr="aria-label:nav.mobileLabel">
+      <a href="#servicii" style="--i:0" data-i18n="nav.services">Servicii</a>
+      <a href="#portofoliu" style="--i:1" data-i18n="nav.portfolio">Portofoliu</a>
+      <a href="#proces" style="--i:2" data-i18n="nav.process">Proces</a>
+      <a href="#preturi" style="--i:3" data-i18n="nav.pricing">Prețuri</a>
+      <a href="#faq" style="--i:4" data-i18n="nav.faq">FAQ</a>
+      <a href="#contact" style="--i:5" class="mobile-menu__cta" data-i18n="nav.contact">Contact</a>
+    </nav>
+  </div>
+
+  <main id="top">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="container hero__grid">
+        <div class="hero__content">
+          <div class="badge hero__badge"><span class="badge__dot"></span> <span data-i18n="hero.badge">Disponibili pentru proiecte noi</span></div>
+
+          <h1 class="hero__title" aria-label="Transformăm ore de stream în clipuri virale" data-i18n-attr="aria-label:hero.title">
+            <span class="line" aria-hidden="true"><span data-i18n="hero.line1">Transformăm ore</span></span>
+            <span class="line" aria-hidden="true"><span data-i18n="hero.line2">de stream în</span></span>
+            <span class="line" aria-hidden="true"><span class="rotator grad-text" data-words="hero">clipuri virale</span></span>
+          </h1>
+
+          <p class="hero__sub" data-i18n="hero.sub">Studio de editare video pentru <strong>streameri</strong> și <strong>YouTuberi</strong>. Shorts, TikTok-uri, highlights și compilații montate rapid, cu subtitrări animate, sound design și un ritm care ține privitorul până la ultima secundă.</p>
+
+          <div class="hero__cta">
+            <a href="#portofoliu" class="btn btn--primary magnetic"><span data-i18n="hero.ctaWork">Vezi portofoliul</span><svg class="icon"><use href="#i-arrow"/></svg></a>
+            <a href="#contact" class="btn btn--ghost magnetic"><span data-i18n="hero.ctaQuote">Cere o ofertă</span></a>
+          </div>
+
+          <div class="hero__trust">
+            <div class="avatars" aria-hidden="true">
+              <span style="--h:265">AM</span><span style="--h:330">IR</span><span style="--h:190">VT</span><span style="--h:30">BD</span>
+            </div>
+            <p data-i18n="hero.trust"><strong>60+ creatori</strong> ne-au încredințat conținutul lor</p>
+          </div>
+        </div>
+
+        <!-- Editor video animat -->
+        <div class="hero__visual" aria-hidden="true">
+          <div class="chip chip--views" data-depth="1.6">
+            <span class="chip__icon"><svg class="icon"><use href="#i-trend"/></svg></span>
+            <div><strong data-live-views>2.481.093</strong><small data-i18n="editor.chipViews">vizualizări în 7 zile</small></div>
+          </div>
+
+          <div class="editor" data-depth="1">
+            <div class="editor__top">
+              <span class="dots"><i></i><i></i><i></i></span>
+              <span class="editor__file">stream_highlights_v3.prproj</span>
+              <span class="editor__rec">REC</span>
+            </div>
+            <div class="editor__body">
+              <div class="editor__preview">
+                <div class="screen" style="--h:265">
+                  <div class="scene">
+                    <span class="scene__sun"></span>
+                    <span class="scene__hills"></span>
+                    <span class="scene__hills scene__hills--front"></span>
+                    <span class="scene__cross"></span>
+                  </div>
+                  <div class="hud">
+                    <span class="hud__live">LIVE</span>
+                    <span class="hud__viewers"><svg class="icon"><use href="#i-eye"/></svg> 12.4K</span>
+                  </div>
+                  <div class="hud__feed"><span data-i18n="editor.feed1">TU ▸ ENEMY_01</span><span data-i18n="editor.feed2">TU ▸ ENEMY_02</span></div>
+                  <div class="hud__hp"><i></i></div>
+                  <div class="hud__ammo">24 / 90</div>
+                  <div class="cam"><span class="avatar"></span></div>
+                  <div class="caption" data-captions="editor"></div>
+                  <div class="screen__flash"></div>
+                </div>
+                <div class="editor__tc"><span data-timecode>00:00:00:00</span><span>/ 00:01:00:00</span></div>
+              </div>
+              <div class="inspector">
+                <div class="inspector__title" data-i18n="editor.effects">Efecte</div>
+                <div class="fx is-on"><span data-i18n="editor.fx.zoom">Zoom punch</span><i></i></div>
+                <div class="fx is-on"><span data-i18n="editor.fx.captions">Subtitrări</span><i></i></div>
+                <div class="fx"><span data-i18n="editor.fx.sfx">SFX whoosh</span><i></i></div>
+                <div class="fx is-on"><span data-i18n="editor.fx.color">Color grade</span><i></i></div>
+                <div class="inspector__title" data-i18n="editor.audio">Audio</div>
+                <div class="meter"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                <div class="export"><span>9:16</span><span>1080p</span><span>60fps</span></div>
+              </div>
+            </div>
+            <div class="timeline">
+              <div class="timeline__lanes">
+                <div class="ruler"><span>00:00</span><span>00:15</span><span>00:30</span><span>00:45</span><span>01:00</span></div>
+                <div class="track" data-label="T1">
+                  <div class="clip clip--t" style="--l:4;--w:14">HOOK</div>
+                  <div class="clip clip--t" style="--l:26;--w:18">SUBS</div>
+                  <div class="clip clip--t" style="--l:54;--w:12">LOL</div>
+                  <div class="clip clip--t" style="--l:80;--w:16">FOLLOW</div>
+                </div>
+                <div class="track" data-label="V2">
+                  <div class="clip clip--fx" style="--l:0;--w:10">zoom</div>
+                  <div class="clip clip--fx" style="--l:22;--w:14">shake</div>
+                  <div class="clip clip--fx" style="--l:46;--w:22">facecam</div>
+                  <div class="clip clip--fx" style="--l:76;--w:10">glitch</div>
+                </div>
+                <div class="track track--v1" data-label="V1">
+                  <div class="clip clip--v" style="--l:0;--w:24;--ch:265">clutch.mp4</div>
+                  <div class="clip clip--v" style="--l:24;--w:20;--ch:195">reactie.mp4</div>
+                  <div class="clip clip--v" style="--l:44;--w:30;--ch:330">fail.mp4</div>
+                  <div class="clip clip--v" style="--l:74;--w:26;--ch:25">outro.mp4</div>
+                </div>
+                <div class="track track--a1" data-label="A1"><div class="wave"></div></div>
+                <div class="playhead-wrap"><div class="playhead"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="phone-wrap" data-depth="2.4">
+            <div class="phone">
+              <div class="phone__screen">
+                <div class="phone__progress"><span></span></div>
+                <div class="phone__cam"><span class="avatar"></span></div>
+                <div class="phone__game screen" style="--h:330">
+                  <div class="scene">
+                    <span class="scene__sun"></span>
+                    <span class="scene__hills"></span>
+                    <span class="scene__hills scene__hills--front"></span>
+                  </div>
+                </div>
+                <div class="caption caption--phone" data-captions="phone"></div>
+                <div class="phone__actions">
+                  <span><svg class="icon icon--fill"><use href="#i-heart"/></svg><b data-live-likes>248K</b></span>
+                  <span><svg class="icon"><use href="#i-comment"/></svg><b>3.1K</b></span>
+                  <span><svg class="icon"><use href="#i-send"/></svg><b>12K</b></span>
+                </div>
+                <div class="phone__meta"><strong data-i18n="editor.phoneHandle">@creatorul.tau</strong><span data-i18n="editor.phoneCaption">momentul ăsta… #gaming #fyp</span></div>
+                <div class="hearts"><i></i><i></i><i></i><i></i><i></i></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="chip chip--ret" data-depth="2">
+            <small data-i18n="editor.chipRetention">Retenție medie</small>
+            <strong>87%</strong>
+            <span class="chip__bar"><i></i></span>
+          </div>
+          <div class="chip chip--done" data-depth="1.3">
+            <span class="chip__check"><svg class="icon"><use href="#i-check"/></svg></span>
+            <span data-i18n="editor.chipDone">Livrat în 24h</span>
+          </div>
+        </div>
+      </div>
+
+      <a href="#servicii" class="scroll-hint" aria-label="Derulează în jos" data-i18n-attr="aria-label:hero.scroll">
+        <span class="scroll-hint__mouse"><i></i></span>
+        <span class="scroll-hint__text">scroll</span>
+      </a>
+    </section>
+
+    <!-- ============ BENZI MARQUEE ============ -->
+    <div class="bands" aria-label="Platforme pe care livrăm" data-i18n-attr="aria-label:bands.label">
+      <div class="band band--grad">
+        <div class="marquee__track" data-marquee data-speed="70">
+          <span>Twitch</span><svg class="star"><use href="#i-spark4"/></svg>
+          <span>YouTube</span><svg class="star"><use href="#i-spark4"/></svg>
+          <span>TikTok</span><svg class="star"><use href="#i-spark4"/></svg>
+          <span>Instagram Reels</span><svg class="star"><use href="#i-spark4"/></svg>
+          <span>Kick</span><svg class="star"><use href="#i-spark4"/></svg>
+          <span>YouTube Shorts</span><svg class="star"><use href="#i-spark4"/></svg>
+        </div>
+      </div>
+      <div class="band band--dark" aria-hidden="true">
+        <div class="marquee__track marquee__track--rev" data-marquee data-speed="50">
+          <span class="o" data-i18n="bands.shorts">Shorts</span><svg class="star"><use href="#i-spark4"/></svg>
+          <span data-i18n="bands.highlights">Highlights</span><svg class="star"><use href="#i-spark4"/></svg>
+          <span class="o" data-i18n="bands.compilations">Compilații</span><svg class="star"><use href="#i-spark4"/></svg>
+          <span data-i18n="bands.captions">Subtitrări</span><svg class="star"><use href="#i-spark4"/></svg>
+          <span class="o" data-i18n="bands.motion">Motion graphics</span><svg class="star"><use href="#i-spark4"/></svg>
+          <span data-i18n="bands.sound">Sound design</span><svg class="star"><use href="#i-spark4"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ STATISTICI ============ -->
+    <!-- EXEMPLE: înlocuiți cifrele cu datele voastre reale -->
+    <section class="stats">
+      <div class="container">
+        <div class="stats__grid" data-stagger="120">
+          <div class="stat reveal">
+            <div class="stat__num"><span class="counter" data-target="1200">0</span><em>+</em></div>
+            <p data-i18n="stats.clips">clipuri livrate</p>
+          </div>
+          <div class="stat reveal">
+            <div class="stat__num"><span class="counter" data-target="85">0</span><em>M+</em></div>
+            <p data-i18n="stats.views">vizualizări generate</p>
+          </div>
+          <div class="stat reveal">
+            <div class="stat__num"><span class="counter" data-target="60">0</span><em>+</em></div>
+            <p data-i18n="stats.creators">creatori mulțumiți</p>
+          </div>
+          <div class="stat reveal">
+            <div class="stat__num"><span class="counter" data-target="48">0</span><em>h</em></div>
+            <p data-i18n="stats.delivery">timp mediu de livrare</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SERVICII ============ -->
+    <section class="section" id="servicii">
+      <div class="container">
+        <div class="section__head">
+          <span class="eyebrow" data-scramble data-i18n="services.eyebrow">01 — Servicii</span>
+          <h2 class="section__title" data-split data-i18n="services.title">Tot ce-ți trebuie ca să <em>crești</em> pe orice platformă</h2>
+          <p class="section__lead reveal" data-i18n="services.lead">Tu faci stream sau filmezi. Noi transformăm materialul brut în conținut care oprește scroll-ul, ține privitorul și aduce urmăritori noi.</p>
+        </div>
+
+        <div class="services" data-stagger="90">
+          <div class="reveal">
+            <article class="card service" data-tilt style="--c:139 92 246">
+              <span class="service__num">/01</span>
+              <span class="service__icon"><svg class="icon"><use href="#i-phone"/></svg></span>
+              <h3 data-i18n="services.shorts.title">Shorts, TikTok &amp; Reels</h3>
+              <p data-i18n="services.shorts.text">Clipuri verticale 9:16 cu hook în primele 2 secunde, subtitrări animate, zoom-uri dinamice și efecte sonore.</p>
+              <ul class="tags"><li>9:16</li><li data-i18n="services.tag.captions">Subtitrări</li><li data-i18n="services.tag.hook">Hook</li></ul>
+            </article>
+          </div>
+          <div class="reveal">
+            <article class="card service" data-tilt style="--c:255 61 129">
+              <span class="service__num">/02</span>
+              <span class="service__icon"><svg class="icon"><use href="#i-live"/></svg></span>
+              <h3 data-i18n="services.highlights.title">Highlights de stream</h3>
+              <p data-i18n="services.highlights.text">Urmărim VOD-urile tale și extragem cele mai bune momente: clutch-uri, fail-uri, reacții și interacțiuni cu chatul.</p>
+              <ul class="tags"><li>Twitch</li><li>Kick</li><li>YouTube Live</li></ul>
+            </article>
+          </div>
+          <div class="reveal">
+            <article class="card service" data-tilt style="--c:45 226 230">
+              <span class="service__num">/03</span>
+              <span class="service__icon"><svg class="icon"><use href="#i-layers"/></svg></span>
+              <h3 data-i18n="services.compilations.title">Compilații</h3>
+              <p data-i18n="services.compilations.text">Best of-uri, compilații săptămânale sau tematice, cu ritm, tranziții curate și muzică aleasă pe vibe-ul canalului.</p>
+              <ul class="tags"><li data-i18n="services.tag.bestof">Best of</li><li data-i18n="services.tag.weekly">Săptămânal</li><li data-i18n="services.tag.themed">Tematice</li></ul>
+            </article>
+          </div>
+          <div class="reveal">
+            <article class="card service" data-tilt style="--c:255 138 61">
+              <span class="service__num">/04</span>
+              <span class="service__icon"><svg class="icon"><use href="#i-film"/></svg></span>
+              <h3 data-i18n="services.youtube.title">Montaj YouTube</h3>
+              <p data-i18n="services.youtube.text">Video-uri long-form editate pentru retenție: tăieturi pe ritm, b-roll, meme-uri, grafică, color grading și sound design.</p>
+              <ul class="tags"><li data-i18n="services.tag.longform">Long-form</li><li data-i18n="services.tag.retention">Retenție</li><li data-i18n="services.tag.broll">B-roll</li></ul>
+            </article>
+          </div>
+          <div class="reveal">
+            <article class="card service" data-tilt style="--c:212 255 58">
+              <span class="service__num">/05</span>
+              <span class="service__icon"><svg class="icon"><use href="#i-sparkle"/></svg></span>
+              <h3 data-i18n="services.motion.title">Motion graphics</h3>
+              <p data-i18n="services.motion.text">Intro-uri, outro-uri, overlay-uri de stream, alerte animate și elemente de branding care fac canalul ușor de recunoscut.</p>
+              <ul class="tags"><li data-i18n="services.tag.intro">Intro</li><li data-i18n="services.tag.overlay">Overlay</li><li data-i18n="services.tag.branding">Branding</li></ul>
+            </article>
+          </div>
+          <div class="reveal">
+            <article class="card service" data-tilt style="--c:255 225 77">
+              <span class="service__num">/06</span>
+              <span class="service__icon"><svg class="icon"><use href="#i-calendar"/></svg></span>
+              <h3 data-i18n="services.monthly.title">Pachete lunare</h3>
+              <p data-i18n="services.monthly.text">Editor dedicat, livrare constantă și un plan de conținut. Tu intri live, noi ne ocupăm de tot ce vine după.</p>
+              <ul class="tags"><li data-i18n="services.tag.editor">Editor dedicat</li><li data-i18n="services.tag.subscription">Abonament</li></ul>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PORTOFOLIU ============ -->
+    <section class="section" id="portofoliu">
+      <div class="container">
+        <div class="section__head section__head--row">
+          <div>
+            <span class="eyebrow" data-scramble data-i18n="portfolio.eyebrow">02 — Portofoliu</span>
+            <h2 class="section__title" data-split data-i18n="portfolio.title">Clipuri care au <em>adunat milioane</em> de vizualizări</h2>
+          </div>
+          <p class="section__lead reveal" data-i18n="portfolio.lead">O selecție din proiectele noastre recente. Apasă pe orice clip ca să-l vezi.</p>
+        </div>
+
+        <div class="filters reveal" role="tablist" aria-label="Filtrează portofoliul" data-i18n-attr="aria-label:portfolio.filterLabel">
+          <span class="filters__pill" aria-hidden="true"></span>
+          <button class="filter is-active" type="button" role="tab" aria-selected="true" data-filter="all" data-i18n="portfolio.filter.all">Toate</button>
+          <button class="filter" type="button" role="tab" aria-selected="false" data-filter="shorts" data-i18n="portfolio.filter.shorts">Shorts &amp; TikTok</button>
+          <button class="filter" type="button" role="tab" aria-selected="false" data-filter="highlights" data-i18n="portfolio.filter.highlights">Highlights</button>
+          <button class="filter" type="button" role="tab" aria-selected="false" data-filter="compilatii" data-i18n="portfolio.filter.compilations">Compilații</button>
+          <button class="filter" type="button" role="tab" aria-selected="false" data-filter="youtube" data-i18n="portfolio.filter.youtube">Montaj YouTube</button>
+        </div>
+
+        <!-- Cardurile sunt generate din assets/js/portfolio-data.js -->
+        <div class="portfolio" id="portfolio-grid"></div>
+      </div>
+    </section>
+
+    <!-- ============ ÎNAINTE / DUPĂ ============ -->
+    <section class="section" id="diferenta">
+      <div class="container compare-wrap">
+        <div class="section__head">
+          <span class="eyebrow" data-scramble data-i18n="compare.eyebrow">03 — Diferența</span>
+          <h2 class="section__title" data-split data-i18n="compare.title">De la footage brut la <em>conținut care performează</em></h2>
+          <p class="section__lead reveal" data-i18n="compare.lead">Trage de bară și vezi ce se întâmplă cu un moment din stream după ce trece prin mâinile noastre.</p>
+          <ul class="checks" data-stagger="80">
+            <li class="reveal"><svg class="icon"><use href="#i-check"/></svg><span data-i18n="compare.check1">Hook puternic în primele 2 secunde</span></li>
+            <li class="reveal"><svg class="icon"><use href="#i-check"/></svg><span data-i18n="compare.check2">Subtitrări animate, cuvânt cu cuvânt</span></li>
+            <li class="reveal"><svg class="icon"><use href="#i-check"/></svg><span data-i18n="compare.check3">Zoom-uri, punch-in-uri și tranziții</span></li>
+            <li class="reveal"><svg class="icon"><use href="#i-check"/></svg><span data-i18n="compare.check4">Efecte sonore și muzică pe ritm</span></li>
+            <li class="reveal"><svg class="icon"><use href="#i-check"/></svg><span data-i18n="compare.check5">Color grading și format optimizat</span></li>
+          </ul>
+        </div>
+
+        <div class="compare reveal" data-compare data-cursor="TRAGE" data-i18n-attr="data-cursor:compare.cursor">
+          <div class="compare__side compare__side--before">
+            <div class="screen" style="--h:220">
+              <div class="scene">
+                <span class="scene__sun"></span>
+                <span class="scene__hills"></span>
+                <span class="scene__hills scene__hills--front"></span>
+                <span class="scene__cross"></span>
+              </div>
+              <div class="cam"><span class="avatar"></span></div>
+              <span class="compare__label" data-i18n="compare.before">RAW · 2:47:12 de VOD</span>
+            </div>
+          </div>
+          <div class="compare__side compare__side--after">
+            <div class="screen" style="--h:300">
+              <div class="scene">
+                <span class="scene__sun"></span>
+                <span class="scene__hills"></span>
+                <span class="scene__hills scene__hills--front"></span>
+                <span class="scene__cross"></span>
+              </div>
+              <div class="cam"><span class="avatar"></span></div>
+              <div class="caption caption--static" data-i18n="compare.caption"><span class="w is-on">CEL</span> <span class="w is-on">MAI</span> <span class="w is-on is-hl">TARE</span> <span class="w is-on">CLUTCH</span></div>
+              <span class="sticker">WOW!</span>
+              <span class="compare__label compare__label--after" data-i18n="compare.after">EDITAT · 0:38 de aur</span>
+              <span class="compare__bar"><i></i></span>
+            </div>
+          </div>
+          <div class="compare__handle" aria-hidden="true"><span><svg class="icon"><use href="#i-arrow"/></svg><svg class="icon"><use href="#i-arrow"/></svg></span></div>
+          <input class="compare__range" type="range" min="0" max="100" value="50" aria-label="Compară materialul brut cu cel editat" data-i18n-attr="aria-label:compare.rangeLabel">
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROCES (scroll orizontal pe desktop) ============ -->
+    <section class="process" id="proces" data-hscroll>
+      <div class="process__sticky">
+        <div class="container process__head">
+          <div>
+            <span class="eyebrow" data-scramble data-i18n="process.eyebrow">04 — Proces</span>
+            <h2 class="section__title" data-split data-i18n="process.title">Simplu pentru tine. <em>Obsesiv</em> pentru noi.</h2>
+          </div>
+          <p class="section__lead reveal" data-i18n="process.lead">Patru pași, zero bătăi de cap. Majoritatea creatorilor își petrec cu noi mai puțin de 5 minute pe săptămână.</p>
+        </div>
+
+        <div class="process__viewport">
+          <ol class="process__track">
+            <li class="pcard">
+              <span class="pcard__num" data-n="01">01</span>
+              <span class="pcard__icon"><svg class="icon"><use href="#i-upload"/></svg></span>
+              <h3 data-i18n="process.step1.title">Ne trimiți materialul</h3>
+              <p data-i18n="process.step1.text">Link de VOD, Google Drive sau WeTransfer. Ne spui ce stil vrei și pentru ce platforme.</p>
+              <span class="pcard__time" data-i18n="process.step1.time">~5 minute din timpul tău</span>
+            </li>
+            <li class="pcard">
+              <span class="pcard__num" data-n="02">02</span>
+              <span class="pcard__icon"><svg class="icon"><use href="#i-search"/></svg></span>
+              <h3 data-i18n="process.step2.title">Vânăm momentele de aur</h3>
+              <p data-i18n="process.step2.text">Urmărim tot și alegem momentele cu cel mai mare potențial: reacții, fail-uri, clutch-uri, interacțiuni cu chatul.</p>
+              <span class="pcard__time" data-i18n="process.step2.time">Selecție manuală, nu AI</span>
+            </li>
+            <li class="pcard">
+              <span class="pcard__num" data-n="03">03</span>
+              <span class="pcard__icon"><svg class="icon"><use href="#i-scissors"/></svg></span>
+              <h3 data-i18n="process.step3.title">Montaj &amp; polish</h3>
+              <p data-i18n="process.step3.text">Tăieturi pe ritm, subtitrări animate, zoom-uri, SFX, muzică, color grading și grafică pe brandul tău.</p>
+              <span class="pcard__time" data-i18n="process.step3.time">Editori dedicați pe nișa ta</span>
+            </li>
+            <li class="pcard">
+              <span class="pcard__num" data-n="04">04</span>
+              <span class="pcard__icon"><svg class="icon"><use href="#i-send"/></svg></span>
+              <h3 data-i18n="process.step4.title">Livrare &amp; revizii</h3>
+              <p data-i18n="process.step4.text">Primești clipurile gata de postat în 24–72h, cu revizii incluse până ești 100% mulțumit.</p>
+              <span class="pcard__time" data-i18n="process.step4.time">Revizii incluse</span>
+            </li>
+            <li class="pcard pcard--cta">
+              <h3 data-i18n="process.cta.title">Gata să-ți multiplici conținutul?</h3>
+              <p data-i18n="process.cta.text">Primul clip de test îl facem pe cheltuiala noastră.</p>
+              <a href="#contact" class="btn btn--light magnetic"><span data-i18n="process.cta.button">Hai să începem</span><svg class="icon"><use href="#i-arrow"/></svg></a>
+            </li>
+          </ol>
+        </div>
+
+        <div class="container process__progress" aria-hidden="true"><span><i></i></span></div>
+      </div>
+    </section>
+
+    <!-- ============ TESTIMONIALE ============ -->
+    <!-- EXEMPLE: înlocuiți cu testimoniale reale de la clienții voștri -->
+    <section class="section testimonials" id="testimoniale">
+      <div class="container">
+        <div class="section__head section__head--center">
+          <span class="eyebrow" data-scramble data-i18n="testimonials.eyebrow">05 — Testimoniale</span>
+          <h2 class="section__title" data-split data-i18n="testimonials.title">Ce spun <em>creatorii</em> cu care lucrăm</h2>
+        </div>
+      </div>
+      <div class="tmarquee reveal">
+        <div class="tmarquee__row">
+          <div class="marquee__track" data-marquee data-speed="40">
+            <figure class="tcard">
+              <div class="tcard__stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div>
+              <blockquote data-i18n="testimonials.q1">„De când lucrez cu ei, TikTok-ul meu a trecut de la 2K la 140K de urmăritori în 4 luni. Clipurile sunt exact pe vibe-ul meu.”</blockquote>
+              <figcaption class="tcard__author"><span class="tcard__avatar" style="--h:265">AM</span><span><strong>Andrei M.</strong><small data-i18n="testimonials.role1">Streamer Twitch · 85K</small></span></figcaption>
+            </figure>
+            <figure class="tcard">
+              <div class="tcard__stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div>
+              <blockquote data-i18n="testimonials.q2">„Le trimit VOD-ul seara și dimineață am 10 shorts gata de postat. N-am mai deschis un program de editare de jumătate de an.”</blockquote>
+              <figcaption class="tcard__author"><span class="tcard__avatar" style="--h:330">IR</span><span><strong>Ioana R.</strong><small data-i18n="testimonials.role2">Creator YouTube · 210K</small></span></figcaption>
+            </figure>
+            <figure class="tcard">
+              <div class="tcard__stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div>
+              <blockquote data-i18n="testimonials.q3">„Compilațiile lunare au devenit cele mai vizionate video-uri de pe canal. Ritmul e impecabil.”</blockquote>
+              <figcaption class="tcard__author"><span class="tcard__avatar" style="--h:190">VT</span><span><strong>Vlad T.</strong><small data-i18n="testimonials.role3">Streamer Kick · 40K</small></span></figcaption>
+            </figure>
+          </div>
+        </div>
+        <div class="tmarquee__row">
+          <div class="marquee__track marquee__track--rev" data-marquee data-speed="34">
+            <figure class="tcard">
+              <div class="tcard__stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div>
+              <blockquote data-i18n="testimonials.q4">„Comunicare rapidă, revizii fără nervi și subtitrări care chiar arată bine. Exact ce căutam.”</blockquote>
+              <figcaption class="tcard__author"><span class="tcard__avatar" style="--h:30">BD</span><span><strong>Bianca D.</strong><small data-i18n="testimonials.role4">Creator TikTok · 320K</small></span></figcaption>
+            </figure>
+            <figure class="tcard">
+              <div class="tcard__stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div>
+              <blockquote data-i18n="testimonials.q5">„Au prins umorul canalului din prima. Îmi economisesc cam 20 de ore pe săptămână.”</blockquote>
+              <figcaption class="tcard__author"><span class="tcard__avatar" style="--h:140">MP</span><span><strong>Mihai P.</strong><small data-i18n="testimonials.role5">YouTuber gaming · 95K</small></span></figcaption>
+            </figure>
+            <figure class="tcard">
+              <div class="tcard__stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div>
+              <blockquote data-i18n="testimonials.q6">„Highlights-urile din turneu au ajuns virale în comunitate a doua zi. Recomand 100%.”</blockquote>
+              <figcaption class="tcard__author"><span class="tcard__avatar" style="--h:220">RC</span><span><strong>Radu C.</strong><small data-i18n="testimonials.role6">Jucător e-sports · 60K</small></span></figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PREȚURI ============ -->
+    <!-- EXEMPLE: prețurile sunt orientative, actualizați-le -->
+    <section class="section" id="preturi">
+      <div class="container">
+        <div class="section__head section__head--center">
+          <span class="eyebrow" data-scramble data-i18n="pricing.eyebrow">06 — Prețuri</span>
+          <h2 class="section__title" data-split data-i18n="pricing.title">Pachete pentru <em>orice etapă</em> a canalului</h2>
+          <p class="section__lead reveal" data-i18n="pricing.lead">Prețuri transparente, fără costuri ascunse. Toate pachetele pot fi personalizate.</p>
+        </div>
+
+        <div class="pricing" data-stagger="120">
+          <div class="reveal">
+            <article class="plan">
+              <h3 class="plan__name">Starter</h3>
+              <p class="plan__desc" data-i18n="pricing.starter.desc">Pentru creatorii care abia încep cu short-form.</p>
+              <div class="plan__price"><span data-i18n="pricing.starter.price">149 €</span><small data-i18n="pricing.perMonth">/ lună</small></div>
+              <ul>
+                <li><svg class="icon"><use href="#i-check"/></svg><span data-i18n="pricing.starter.f1">10 shorts / lună</span></li>
+                <li><svg class="icon"><use href="#i-check"/></svg><span data-i18n="pricing.starter.f2">Subtitrări animate</span></li>
+                <li><svg class="icon"><use href="#i-check"/></svg><span data-i18n="pricing.starter.f3">1 rundă de revizii</span></li>
+                <li><svg class="icon"><use href="#i-check"/></svg><span data-i18n="pricing.starter.f4">Livrare în 72h</span></li>
+              </ul>
+              <a href="#contact" class="btn btn--ghost" data-plan="Starter"><span data-i18n="pricing.starter.cta">Alege Starter</span></a>
+            </article>
+          </div>
+          <div class="reveal">
+            <article class="plan plan--featured">
+              <span class="plan__badge" data-i18n="pricing.badge">Cel mai popular</span>
+              <h3 class="plan__name">Creator</h3>
+              <p class="plan__desc" data-i18n="pricing.creator.desc">Pentru streamerii care vor să crească constant.</p>
+              <div class="plan__price"><span data-i18n="pricing.creator.price">349 €</span><small data-i18n="pricing.perMonth">/ lună</small></div>
+              <ul>
+                <li><svg class="icon"><use href="#i-check"/></svg><span data-i18n="pricing.creator.f1">30 shorts / lună</span></li>
+                <li><svg class="icon"><use href="#i-check"/></svg><span data-i18n="pricing.creator.f2">2 compilații / lună</span></li>
+                <li><svg class="icon"><use href="#i-check"/></svg><span data-i18n="pricing.creator.f3">Subtitrări, SFX și zoom-uri</span></li>
+                <li><svg class="icon"><use href="#i-check"/></svg><span data-i18n="pricing.creator.f4">2 runde de revizii</span></li>
+                <li><svg class="icon"><use href="#i-check"/></svg><span data-i18n="pricing.creator.f5">Livrare în 48h</span></li>
+              </ul>
+              <a href="#contact" class="btn btn--primary" data-plan="Creator"><span data-i18n="pricing.creator.cta">Alege Creator</span><svg class="icon"><use href="#i-arrow"/></svg></a>
+            </article>
+          </div>
+          <div class="reveal">
+            <article class="plan">
+              <h3 class="plan__name">Pro Streamer</h3>
+              <p class="plan__desc" data-i18n="pricing.pro.desc">Echipa ta de post-producție, complet dedicată.</p>
+              <div class="plan__price"><span data-i18n="pricing.pro.price">Custom</span></div>
+              <ul>
+                <li><svg class="icon"><use href="#i-check"/></svg><span data-i18n="pricing.pro.f1">Editor dedicat</span></li>
+                <li><svg class="icon"><use href="#i-check"/></svg><span data-i18n="pricing.pro.f2">Shorts + montaj YouTube</span></li>
+                <li><svg class="icon"><use href="#i-check"/></svg><span data-i18n="pricing.pro.f3">Motion graphics &amp; branding</span></li>
+                <li><svg class="icon"><use href="#i-check"/></svg><span data-i18n="pricing.pro.f4">Revizii nelimitate</span></li>
+                <li><svg class="icon"><use href="#i-check"/></svg><span data-i18n="pricing.pro.f5">Livrare în 24h</span></li>
+              </ul>
+              <a href="#contact" class="btn btn--ghost" data-plan="Pro Streamer"><span data-i18n="pricing.pro.cta">Hai să vorbim</span></a>
+            </article>
+          </div>
+        </div>
+        <p class="pricing__note reveal" data-i18n="pricing.note">Ai nevoie de un singur proiect? Facem și comenzi punctuale, fără abonament.</p>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="section" id="faq">
+      <div class="container faq-wrap">
+        <div class="section__head faq__head">
+          <span class="eyebrow" data-scramble data-i18n="faq.eyebrow">07 — FAQ</span>
+          <h2 class="section__title" data-split data-i18n="faq.title">Întrebări <em>frecvente</em></h2>
+          <p class="section__lead reveal" data-i18n="faq.lead">Nu găsești răspunsul? <a href="#contact" class="link">Scrie-ne direct</a> și îți răspundem în câteva ore.</p>
+        </div>
+
+        <div class="faq" data-stagger="70">
+          <div class="faq__item reveal">
+            <button class="faq__q" type="button" aria-expanded="false" aria-controls="faq-1" id="faq-1-q"><span data-i18n="faq.q1">Cât durează livrarea?</span><i class="faq__icon"></i></button>
+            <div class="faq__a" id="faq-1" role="region" aria-labelledby="faq-1-q"><div><p data-i18n="faq.a1">De obicei 24–72 de ore pentru shorts și 3–5 zile lucrătoare pentru video-urile long-form, în funcție de volum și de complexitate.</p></div></div>
+          </div>
+          <div class="faq__item reveal">
+            <button class="faq__q" type="button" aria-expanded="false" aria-controls="faq-2" id="faq-2-q"><span data-i18n="faq.q2">Ce material trebuie să vă trimit?</span><i class="faq__icon"></i></button>
+            <div class="faq__a" id="faq-2" role="region" aria-labelledby="faq-2-q"><div><p data-i18n="faq.a2">Doar link-ul către VOD (Twitch, YouTube, Kick) sau fișierele brute pe Google Drive / WeTransfer. Dacă ai preferințe de stil, trimite-ne câteva exemple care îți plac.</p></div></div>
+          </div>
+          <div class="faq__item reveal">
+            <button class="faq__q" type="button" aria-expanded="false" aria-controls="faq-3" id="faq-3-q"><span data-i18n="faq.q3">Câte revizii sunt incluse?</span><i class="faq__icon"></i></button>
+            <div class="faq__a" id="faq-3" role="region" aria-labelledby="faq-3-q"><div><p data-i18n="faq.a3">Depinde de pachet: între una și un număr nelimitat de runde. În practică, după primele 2–3 clipuri ne prindem de stilul tău și reviziile devin rare.</p></div></div>
+          </div>
+          <div class="faq__item reveal">
+            <button class="faq__q" type="button" aria-expanded="false" aria-controls="faq-4" id="faq-4-q"><span data-i18n="faq.q4">Ale cui sunt drepturile asupra clipurilor?</span><i class="faq__icon"></i></button>
+            <div class="faq__a" id="faq-4" role="region" aria-labelledby="faq-4-q"><div><p data-i18n="faq.a4">Ale tale, integral. Poți publica clipurile pe orice platformă și le poți monetiza. Livrăm în formatele optimizate pentru TikTok, YouTube Shorts, Instagram Reels și YouTube.</p></div></div>
+          </div>
+          <div class="faq__item reveal">
+            <button class="faq__q" type="button" aria-expanded="false" aria-controls="faq-5" id="faq-5-q"><span data-i18n="faq.q5">Lucrați și cu creatori mici?</span><i class="faq__icon"></i></button>
+            <div class="faq__a" id="faq-5" role="region" aria-labelledby="faq-5-q"><div><p data-i18n="faq.a5">Absolut. Mulți dintre clienții noștri au început cu câteva sute de urmăritori. Pachetul Starter e gândit exact pentru etapa asta.</p></div></div>
+          </div>
+          <div class="faq__item reveal">
+            <button class="faq__q" type="button" aria-expanded="false" aria-controls="faq-6" id="faq-6-q"><span data-i18n="faq.q6">Cum se face plata?</span><i class="faq__icon"></i></button>
+            <div class="faq__a" id="faq-6" role="region" aria-labelledby="faq-6-q"><div><p data-i18n="faq.a6">Prin transfer bancar sau card, pe bază de factură. Abonamentele se plătesc lunar, iar proiectele punctuale 50% în avans și 50% la livrare.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="section contact" id="contact">
+      <div class="container contact__grid">
+        <div class="contact__info">
+          <span class="eyebrow" data-scramble data-i18n="contact.eyebrow">08 — Contact</span>
+          <h2 class="contact__title" data-split data-i18n="contact.title">Ai conținutul. Noi îl facem <em>viral.</em></h2>
+          <p class="section__lead reveal" data-i18n="contact.lead">Spune-ne pe scurt despre canalul tău și primești o ofertă personalizată și un clip de test gratuit.</p>
+
+          <!-- Date de contact: înlocuiți cu ale voastre -->
+          <ul class="contact__list" data-stagger="90">
+            <li class="reveal"><span class="ci"><svg class="icon"><use href="#i-mail"/></svg></span><div><small data-i18n="contact.emailLabel">Email</small><a href="mailto:contact@cliplab.ro">contact@cliplab.ro</a></div></li>
+            <li class="reveal"><span class="ci"><svg class="icon"><use href="#i-comment"/></svg></span><div><small>Discord</small><span>cliplab.studio</span></div></li>
+            <li class="reveal"><span class="ci"><svg class="icon"><use href="#i-clock"/></svg></span><div><small data-i18n="contact.responseLabel">Timp de răspuns</small><span data-i18n="contact.responseValue">sub 2 ore, luni–vineri</span></div></li>
+          </ul>
+
+          <div class="socials reveal">
+            <a href="#" class="social">YouTube</a>
+            <a href="#" class="social">TikTok</a>
+            <a href="#" class="social">Instagram</a>
+            <a href="#" class="social">Twitch</a>
+          </div>
+        </div>
+
+        <!--
+          Formular: setați data-endpoint cu un URL Formspree / Getform (ex: https://formspree.io/f/xxxxxx)
+          ca mesajele să ajungă direct pe email. Dacă rămâne gol, se deschide clientul de email al vizitatorului.
+        -->
+        <div class="reveal">
+          <form class="form card" id="contact-form" data-endpoint="" data-email="contact@cliplab.ro" novalidate>
+            <div class="form__row">
+              <div class="field">
+                <input type="text" id="f-name" name="nume" placeholder=" " autocomplete="name" required>
+                <label for="f-name" data-i18n="form.name">Nume</label>
+                <small class="field__error" data-i18n="form.nameError">Spune-ne cum te cheamă</small>
+              </div>
+              <div class="field">
+                <input type="email" id="f-email" name="email" placeholder=" " autocomplete="email" required>
+                <label for="f-email" data-i18n="form.email">Email</label>
+                <small class="field__error" data-i18n="form.emailError">Adaugă un email valid</small>
+              </div>
+            </div>
+            <div class="form__row">
+              <div class="field">
+                <input type="text" id="f-channel" name="canal" placeholder=" ">
+                <label for="f-channel" data-i18n="form.channel">Link canal (Twitch, YouTube…)</label>
+              </div>
+              <div class="field field--select">
+                <select id="f-service" name="serviciu">
+                  <option value="shorts" data-i18n="form.option.shorts">Shorts / TikTok / Reels</option>
+                  <option value="highlights" data-i18n="form.option.highlights">Highlights de stream</option>
+                  <option value="compilations" data-i18n="form.option.compilations">Compilații</option>
+                  <option value="youtube" data-i18n="form.option.youtube">Montaj YouTube</option>
+                  <option value="motion" data-i18n="form.option.motion">Motion graphics</option>
+                  <option value="monthly" data-i18n="form.option.monthly">Pachet lunar</option>
+                </select>
+                <label for="f-service" data-i18n="form.serviceLabel">Serviciu</label>
+              </div>
+            </div>
+            <fieldset class="chips">
+              <legend data-i18n="form.budget.legend">Buget lunar estimativ</legend>
+              <label class="chip-radio"><input type="radio" name="buget" value="sub 200 €" data-i18n-attr="value:form.budget.low"><span data-i18n="form.budget.low">sub 200 €</span></label>
+              <label class="chip-radio"><input type="radio" name="buget" value="200–500 €" data-i18n-attr="value:form.budget.mid" checked><span data-i18n="form.budget.mid">200–500 €</span></label>
+              <label class="chip-radio"><input type="radio" name="buget" value="500 €+" data-i18n-attr="value:form.budget.high"><span data-i18n="form.budget.high">500 €+</span></label>
+              <label class="chip-radio"><input type="radio" name="buget" value="Nu știu încă" data-i18n-attr="value:form.budget.unsure"><span data-i18n="form.budget.unsure">Nu știu încă</span></label>
+            </fieldset>
+            <div class="field">
+              <textarea id="f-msg" name="mesaj" placeholder=" " required></textarea>
+              <label for="f-msg" data-i18n="form.message">Povestește-ne despre conținutul tău</label>
+              <small class="field__error" data-i18n="form.messageError">Scrie-ne câteva cuvinte</small>
+            </div>
+            <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <button type="submit" class="btn btn--primary btn--block form__submit">
+              <span class="form__submit-text" data-i18n="form.submit">Trimite mesajul</span>
+              <svg class="icon"><use href="#i-send"/></svg>
+              <span class="spinner" aria-hidden="true"></span>
+            </button>
+            <p class="form__status" role="status" aria-live="polite"></p>
+
+            <div class="form__success" aria-hidden="true">
+              <svg class="form__success-check" viewBox="0 0 52 52"><circle cx="26" cy="26" r="24"/><path d="M15 27l7 7 15-15"/></svg>
+              <h3 data-i18n="form.success.title">Mesaj trimis!</h3>
+              <p data-i18n="form.success.text">Mulțumim! Revenim cu un răspuns în cel mult 24 de ore.</p>
+              <button type="button" class="btn btn--ghost btn--sm" data-form-reset><span data-i18n="form.success.again">Trimite alt mesaj</span></button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a href="#top" class="logo" aria-label="CLIPLAB — înapoi sus" data-i18n-attr="aria-label:footer.logo">
+            <span class="logo__mark"><svg viewBox="0 0 24 24"><use href="#i-play"/></svg></span>
+            <span class="logo__text">CLIP<em>LAB</em></span>
+          </a>
+          <p data-i18n="footer.about">Studio de editare video pentru streameri și YouTuberi. Facem conținutul tău să ajungă mai departe.</p>
+        </div>
+        <div>
+          <h4 data-i18n="footer.navTitle">Navigare</h4>
+          <ul>
+            <li><a href="#servicii" data-i18n="nav.services">Servicii</a></li>
+            <li><a href="#portofoliu" data-i18n="nav.portfolio">Portofoliu</a></li>
+            <li><a href="#proces" data-i18n="nav.process">Proces</a></li>
+            <li><a href="#preturi" data-i18n="nav.pricing">Prețuri</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 data-i18n="footer.servicesTitle">Servicii</h4>
+          <ul>
+            <li><a href="#servicii" data-i18n="footer.services.shorts">Shorts &amp; TikTok</a></li>
+            <li><a href="#servicii" data-i18n="footer.services.highlights">Highlights</a></li>
+            <li><a href="#servicii" data-i18n="footer.services.compilations">Compilații</a></li>
+            <li><a href="#servicii" data-i18n="footer.services.youtube">Montaj YouTube</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 data-i18n="footer.socialTitle">Social</h4>
+          <ul>
+            <li><a href="#">YouTube</a></li>
+            <li><a href="#">TikTok</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">Discord</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer__big" aria-hidden="true" data-letters>CLIPLAB</div>
+
+    <div class="container footer__bottom">
+      <span>© <span data-year>2026</span> CLIPLAB. <span data-i18n="footer.rights">Toate drepturile rezervate.</span></span>
+      <a href="#top" class="footer__top-link"><span data-i18n="footer.backToTop">Înapoi sus</span> <svg class="icon"><use href="#i-up"/></svg></a>
+    </div>
+  </footer>
+
+  <!-- ============ MODAL VIDEO ============ -->
+  <div class="modal" id="video-modal" aria-hidden="true">
+    <div class="modal__backdrop" data-close></div>
+    <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal__close" type="button" data-close aria-label="Închide" data-i18n-attr="aria-label:modal.close"><svg class="icon"><use href="#i-close"/></svg></button>
+      <div class="modal__media"></div>
+      <div class="modal__info">
+        <span class="modal__cat"></span>
+        <h3 id="modal-title"></h3>
+        <p class="modal__meta"></p>
+      </div>
+    </div>
+  </div>
+
+  <noscript><style>.preloader{display:none!important}body{overflow:auto!important}</style></noscript>
+</body>
+</html>
